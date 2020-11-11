@@ -14,4 +14,10 @@ class Market
       vendor.name
     end
   end
+
+  def vendors_that_sell(arg_item)
+    @vendors.find_all do |vendor|
+      vendor.inventory.include?(arg_item)
+    end
+  end
 end
