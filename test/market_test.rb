@@ -92,32 +92,39 @@ class MarketTest < Minitest::Test
   end
 
   def test_it_can_total_inventory
-    #d48 = item 1
-    # #ce8 = item 2
-    # #f18 = item 3
-    # 3038 = item 4
-    #
-    # a1160 = vendor 1
-    # #bed40 = vendor 2
-    # #0650 = vendor 3
+    skip
+    @vendor1.stock(@item1, 35)
+    @vendor1.stock(@item2, 7)
+
+    @vendor2.stock(@item4, 50)
+    @vendor2.stock(@item3, 25)
+
+    @vendor3.stock(@item1, 65)
+
+    @market.add_vendor(@vendor1)
+    @market.add_vendor(@vendor2)
+    @market.add_vendor(@vendor3)
+
     expected = {
-        @item1 => {
-            quantity: 100,
-            vendors: [@vendor1,@vendor3]
+      @item1 => {
+        quantity: 100,
+        vendors: [@vendor1,@vendor3]
+      },
+      @item2 => {
+          quantity: 7,
+          vendors: [@vendor1]
         },
-        @item2 => {
-            quantity: 7,
-            vendors: [@vendor1]
+      @item4 => {
+          quantity: 50,
+          vendors: [@vendor2]
         },
-        @item4 => {
-            quantity: 50,
-            vendors: [@vendor2]
-        },
-        @item3 => {
-            quantity: 35,
-            vendors: [@vendor2,@vendor3]
+      @item3 => {
+          quantity: 35,
+          vendors: [@vendor2,@vendor3]
         }
     }
+
     assert_equal expected, @market.total_inventory
   end
+
 end
