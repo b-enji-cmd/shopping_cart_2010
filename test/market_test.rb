@@ -90,4 +90,34 @@ class MarketTest < Minitest::Test
     assert_equal 345.00,@vendor2.potential_revenue
     assert_equal 48.75,@vendor3.potential_revenue
   end
+
+  def test_it_can_total_inventory
+    #d48 = item 1
+    # #ce8 = item 2
+    # #f18 = item 3
+    # 3038 = item 4
+    #
+    # a1160 = vendor 1
+    # #bed40 = vendor 2
+    # #0650 = vendor 3
+    expected = {
+        @item1 => {
+            quantity: 100,
+            vendors: [@vendor1,@vendor3]
+        },
+        @item2 => {
+            quantity: 7,
+            vendors: [@vendor1]
+        },
+        @item4 => {
+            quantity: 50,
+            vendors: [@vendor2]
+        },
+        @item3 => {
+            quantity: 35,
+            vendors: [@vendor2,@vendor3]
+        }
+    }
+    assert_equal expected, @market.total_inventory
+  end
 end
