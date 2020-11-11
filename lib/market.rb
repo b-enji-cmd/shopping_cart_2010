@@ -10,9 +10,7 @@ class Market
   end
 
   def vendor_names
-    @vendors.map do |vendor|
-      vendor.name
-    end
+    @vendors.map(&:name)
   end
 
   def vendors_that_sell(arg_item)
