@@ -13,5 +13,11 @@ class Vendor
     @inventory[arg_item] += amount
   end
 
-
+  def potential_revenue
+    running_revenue = 0.0
+    @inventory.each do |item,amount|
+      running_revenue += item.price * amount
+    end
+    running_revenue
+  end
 end

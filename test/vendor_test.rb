@@ -54,15 +54,9 @@ class VendorTest < Minitest::Test
   end
 
   def test_it_can_generate_potential_revenue
-    expected = {
-        @item1 => 55,
-        @item2 => 12
-    }
-
-    @vendor.stock(@item1, 55)#0.75 per -> 41.25
-    @vendor.stock(@item2, 12)#0.55 per - > 6.6
-    #should be 47.85
-    assert_equal 47.85, @vendor.potential_revenue
+    @vendor.stock(@item1, 55)
+    @vendor.stock(@item2, 12)
+    assert_equal 47.25, @vendor.potential_revenue
 
   end
 end
